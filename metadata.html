@@ -1,0 +1,197 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+    <!-- ширина равна области просмотра экрана устройства, начальный масштаб стринцы - 1:1, name="viewport" - управление областью просмотра страницы -->
+    <title>Проект - главная страница</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <!-- подключение будстрэпа, rel="stylesheet" - стиль страницы, остальное для безопасности, crossorigin="anonymous" - данные не передаются -->
+    <style>
+        .justified-text {
+            text-align: justify;
+            hyphens: auto;
+            -webkit-hyphens: auto;
+            -ms-hyphens: auto;
+        }
+        .csv-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        .csv-table th, .csv-table td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+        .csv-table th {
+            background-color:blue;
+            color: white;
+            font-weight: bold;
+        }
+        .csv-table tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        .csv-table tr:hover {
+            background-color: #ddd;
+        }
+        .table-container {
+            overflow-x: auto;
+            margin: 20px 0;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container" style="color: blue; font-family: 'Roboto Mono', monospace;"> <!-- бутстрап класс, центрирование, отступы-->
+        <header class="card card-header" style="background-color:lightskyblue;"> <!-- карточный компонент, задает фоновый цвет и отступы -->
+            <div class="card-body"> <!-- внутренний контейнер для контента -->
+                <h3 class="card-title text-center" id="start">Анализ корпуса текстов<br>В.Ходасевича</h3>
+            </div>
+        </header>
+
+        <div class="card text-center" style="font-size: 20px;">
+            <div class="card-header" style="background-color: rgb(7, 132, 234);">
+                <ul class="nav nav-pills card-header-pills"> <!-- создание кнопок -->
+                    <li class="nav-item">
+                        <a class="nav-link" style="color: white;" href="index.html">О проекте</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" style="color: white;" href="metadata.html">Метаданные</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" style="color: white;" href="statistics.html">Статистика</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" style="color: white;" href="results.html">Результаты</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" style="color: white;" href="texts.html">Тексты</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="container" style="font-size: 20px; line-height: 1.6; padding: 20px; background-color:whitesmoke;">
+            <h4 class="text-center mb-4">Метаданные корпуса текстов</h4>
+            
+            <!-- Контейнер для таблицы -->
+            <div class="table-container">
+                <table id="csv-table" class="csv-table">
+                    <!-- Таблица будет создана JavaScript -->
+                </table>
+            </div>
+            
+            <!-- Индикатор загрузки -->
+            <div id="loading" class="text-center">
+                <div class="spinner-border text-primary" role="status">
+                    <span class="visually-hidden">Загрузка...</span>
+                </div>
+                <p>Загрузка данных...</p>
+            </div>
+            
+            <!-- Сообщение об ошибке -->
+            <div id="error-message" class="alert alert-danger d-none"></div>
+        </div>
+    </div>
+
+    <script>
+        // Загружаем CSV файл
+        async function loadCSVTable() {
+            try {
+                console.log('Начинаю загрузку CSV файла...');
+                
+                // Укажите путь к вашему CSV файлу
+                const response = await fetch('data/metadata.csv');
+                
+                if (!response.ok) {
+                    throw new Error(`Ошибка загрузки файла: ${response.status}`);
+                }
+                
+                const csvText = await response.text();
+                console.log('Файл загружен успешно, размер:', csvText.length, 'символов');
+                
+                // Скрываем индикатор загрузки
+                document.getElementById('loading').style.display = 'none';
+                
+                // Парсим CSV
+                const rows = csvText.split('\n').filter(row => row.trim() !== '');
+                console.log('Найдено строк в CSV:', rows.length);
+                
+                if (rows.length === 0) {
+                    throw new Error('CSV файл пуст');
+                }
+                
+                // Получаем заголовки
+                const headers = rows[0].split(',').map(header => header.trim());
+                console.log('Заголовки таблицы:', headers);
+                
+                // Создаем таблицу
+                const table = document.getElementById('csv-table');
+                
+                // Создаем заголовок таблицы
+                const thead = document.createElement('thead');
+                const headerRow = document.createElement('tr');
+                
+                headers.forEach(header => {
+                    const th = document.createElement('th');
+                    th.textContent = header;
+                    headerRow.appendChild(th);
+                });
+                thead.appendChild(headerRow);
+                table.appendChild(thead);
+                
+                // Создаем тело таблицы
+                const tbody = document.createElement('tbody');
+                
+                for (let i = 1; i < rows.length; i++) {
+                    const cells = rows[i].split(',').map(cell => cell.trim());
+                    const row = document.createElement('tr');
+                    
+                    cells.forEach(cell => {
+                        const td = document.createElement('td');
+                        td.textContent = cell;
+                        row.appendChild(td);
+                    });
+                    
+                    tbody.appendChild(row);
+                }
+                
+                table.appendChild(tbody);
+                
+               
+                
+                console.log('Таблица успешно создана!');
+                
+            } catch (error) {
+                console.error('Ошибка:', error);
+                document.getElementById('loading').style.display = 'none';
+                
+                const errorDiv = document.getElementById('error-message');
+                errorDiv.textContent = `Не удалось загрузить таблицу: ${error.message}`;
+                errorDiv.classList.remove('d-none');
+                
+                // Показываем инструкцию
+                const helpDiv = document.createElement('div');
+                helpDiv.className = 'alert alert-warning mt-3';
+                helpDiv.innerHTML = `
+                    <h5>Как решить проблему:</h5>
+                    <ol>
+                        <li>Убедитесь, что файл <code>data/metadata.csv</code> существует</li>
+                        <li>Запустите локальный сервер: <code>python -m http.server 8000</code></li>
+                        <li>Откройте <a href="http://localhost:8000" target="_blank">http://localhost:8000</a></li>
+                        <li>Проверьте консоль браузера (F12) для деталей ошибки</li>
+                    </ol>
+                `;
+                document.querySelector('.container').appendChild(helpDiv);
+            }
+        }
+        
+        // Загружаем таблицу при загрузке страницы
+        document.addEventListener('DOMContentLoaded', loadCSVTable);
+    </script>
+
+</body>
+</html>
