@@ -4,11 +4,9 @@
 <head>
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1" name="viewport">
-    <!-- ширина равна области просмотра экрана устройства, начальный масштаб стринцы - 1:1, name="viewport" - управление областью просмотра страницы -->
     <title>Проект - главная страница</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <!-- подключение будстрэпа, rel="stylesheet" - стиль страницы, остальное для безопасности, crossorigin="anonymous" - данные не передаются -->
     <style>
         .justified-text {
             text-align: justify;
@@ -20,30 +18,30 @@
 </head>
 
 <body>
-    <div class="container" style="color: blue; font-family: 'Roboto Mono', monospace;"> <!-- бутстрап класс, центрирование, отступы-->
-        <header class="card card-header" style="background-color:lightskyblue;"> <!-- карточный компонент, задает фоновый цвет и отступы -->
-            <div class="card-body"> <!-- внутренний контейнер для контента -->
+    <div class="container" style="color: blue; font-family: 'Roboto Mono', monospace;">
+        <header class="card card-header" style="background-color:lightskyblue;">
+            <div class="card-body">
                 <h3 class="card-title text-center" id="start">Анализ корпуса текстов<br>В.Ходасевича</h3>
             </div>
         </header>
 
         <div class="card text-center" style="font-size: 20px;">
             <div class="card-header" style="background-color: rgb(7, 132, 234);">
-                <ul class="nav nav-pills card-header-pills"> <!-- создание кнопок -->
+                <ul class="nav nav-pills card-header-pills">
                     <li class="nav-item">
-                        <a class="nav-link" style="color: white;" href="index.html" target="_blank">О проекте</a>
+                        <a class="nav-link" style="color: white;" href="index.html" target="_blank" rel="noopener noreferrer">О проекте</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" style="color: white;" href="html/metadata.html" target="_blank">Метаданные</a>
+                        <a class="nav-link" style="color: white;" href="html/metadata.html" target="_blank" rel="noopener noreferrer">Метаданные</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" style="color: white;" href="html/statistics.html" target="_blank">Статистика</a>
+                        <a class="nav-link" style="color: white;" href="html/statistics.html" target="_blank" rel="noopener noreferrer">Статистика</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" style="color: white;" href="html/results.html" target="_blank">Результаты</a>
+                        <a class="nav-link" style="color: white;" href="html/results.html" target="_blank" rel="noopener noreferrer">Результаты</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" style="color: white;" href="html/texts.html" target="_blank">Тексты</a>
+                        <a class="nav-link" style="color: white;" href="html/texts.html" target="_blank" rel="noopener noreferrer">Тексты</a>
                     </li>
                 </ul>
             </div>
