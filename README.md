@@ -15,12 +15,21 @@ corpus_project/
 ├── results/ # Результаты анализа
 │ ├── statistics.csv # Файл с метриками текстов (word_count,words_ucount,lines_count,ttr_count,avg_length)
 │ └── report.txt # Отчет по анализу всего корпуса + детальный анализ каждого текста
+├── html/ # Папка со страницами HTML (сайт с результатами)
+│ ├── index.html # Главная страница
+│ ├── metadata.html # Метаданные
+│ ├── results.html # Результаты
+│ ├── statistics.html # Общая статистика
+│ └── texts.html # Корпус текстов
 ├── main.py # Главный файл с точкой входа
 ├── text_utils.py # Функции анализа текста
 ├── file_utils.py # Функции работы с файлами
 ├── README.md # Документация проекта
 └── PROJECT_REQUIREMENTS.md # Требования к проекту
 ```
-Результаты можно увидеть на сайте: https://aryzkova135-sys.github.io/corpus_project/
+Результаты анализа можно увидеть на сайте: https://aryzkova135-sys.github.io/corpus_project/
+
+
+
 
 
