@@ -27,7 +27,8 @@ corpus_project/
 ├── README.md # Документация проекта
 └── PROJECT_REQUIREMENTS.md # Требования к проекту
 ```
-Результаты можно увидеть на сайте: https://aryzkova135-sys.github.io/corpus_project/
+Результаты анализа можно увидеть на сайте: https://aryzkova135-sys.github.io/corpus_project/
+
 
 
 
