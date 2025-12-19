@@ -21,3 +21,5 @@ your_project_name/
 ├── README.md # Документация проекта
 └── PROJECT_REQUIREMENTS.md # Требования к проекту
 ```
+Результаты можно увидеть на сайте: https://aryzkova135-sys.github.io/corpus_project/
+
