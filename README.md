@@ -29,6 +29,9 @@ corpus_project/
 ```
 Результаты анализа можно увидеть на сайте: https://aryzkova135-sys.github.io/corpus_project/index.html
 
+Выполнила: Рыжкова Анастасия
+
+
 
 
 
