@@ -104,7 +104,7 @@
                 console.log('Начинаю загрузку CSV файла...');
                 
                 // Укажите путь к вашему CSV файлу
-                const response = await fetch('data/metadata.csv');
+                const response = await fetch('../data/metadata.csv');
                 
                 if (!response.ok) {
                     throw new Error(`Ошибка загрузки файла: ${response.status}`);

@@ -53,7 +53,7 @@
             <pre id="poem" class="text-center"></pre>
     
     <script>
-        fetch('results/report.txt')
+        fetch('../results/report.txt')
             .then(response => {
                 if (!response.ok) throw new Error('Файл не найден');
                 return response.text();
